@@ -13,33 +13,93 @@ const CapitalAlSchema = new mongoose.Schema({
   
   imoveisAl: {
     imoveisAlTotal: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     aluguelA: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     aluguelB: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     aluguelC: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     aluguelD: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     aluguelE: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
   },
 

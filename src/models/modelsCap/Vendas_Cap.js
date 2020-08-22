@@ -13,33 +13,93 @@ const CapitalSaleSchema = new mongoose.Schema({
   
   imoveisVend: {
     imoveisVendTotal: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     vendasA: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     vendasB: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     vendasC: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     vendasD: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
 
     vendasE: {
-      type: Number,
-      required: true,
+      casa: {
+        type: Number,
+        required: true,
+      },
+      apart: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      }
     },
   },
 
