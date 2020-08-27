@@ -41,9 +41,9 @@ module.exports = {
     let anos = vCap.map((item,index) => {
       return item.ano;
     });
-
+    
     const vCapAnos = [];
-    for(var i = Math.min(...anos); i <= Math.max(...anos); i++){
+    for(var i = parseInt(req.params.first); i <= parseInt(req.params.last); i++){
       let numeroVendas = [0,0,0];
       let valorVendas = [0,0,0,0,0,0,0,0,0,0,0];
       let tipoImovel = [0,0,0];

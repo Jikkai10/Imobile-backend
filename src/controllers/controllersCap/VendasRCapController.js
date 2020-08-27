@@ -49,9 +49,10 @@ module.exports = {
    
     const vRCapAnos = [];
     regioes.map((valor,index)=>{
-      for(var i = Math.min(...anos); i <= Math.max(...anos); i++){
+      for(var i = parseInt(req.params.first); i <= parseInt(req.params.last); i++){
         let numeroVendas = [0,0,0];
         let tipoImovel = [0,0,0];
+        let valorMedio = 0;
         let quant = 0;
         vRCap.map((item,index)=>{
           if(item.ano === i && item.region === valor){
@@ -87,6 +88,21 @@ module.exports = {
             tipoImovel[0] += item.vendaTipoImovel.luxo;
             tipoImovel[1] += item.vendaTipoImovel.medio;
             tipoImovel[2] += item.vendaTipoImovel.standard;
+
+            let somaDorm = item.vendasDorm.vendKit + item.vendasDorm.vend1Dorm + item.vendasDorm.vend2Dorm + item.vendasDorm.vend3Dorm + item.vendasDorm.vend4Dorm;
+            let casa = (item.valorMed.casas.kit +
+              item.valorMed.casas.dorm1 +
+              item.valorMed.casas.dorm2 +
+              item.valorMed.casas.dorm3 +
+              item.valorMed.casas.dorm4);
+            
+            let apart = (item.valorMed.apart.kit +
+              item.valorMed.apart.dorm1 +
+              item.valorMed.apart.dorm2 +
+              item.valorMed.apart.dorm3 +
+              item.valorMed.apart.dorm4);
+
+            valorMedio += (casa + apart); 
             quant += 1;
           }
         });
@@ -97,6 +113,7 @@ module.exports = {
         vRCapAnos.push({
           ano: i,
           region: valor,
+          valorMedio: valorMedio/quant,
           numeroVendas: numeroVendas,
           vendaTipoImovel: tipoImovel,
         });
