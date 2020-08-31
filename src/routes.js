@@ -12,7 +12,7 @@ routes.delete("/vendasCap/:id", VendasCap.destroy);
 const VendasRCap = require("./controllers/controllersCap/VendasRCapController");
 
 routes.get("/vendasRCap", VendasRCap.index);
-routes.get('/vendasRCap/agrupado/:first/:last', VendasRCap.agruparRegioes)
+routes.get('/vendasRCap/:region/ano/:first/:last', VendasRCap.agruparRegioes)
 routes.post("/vendasRCap", VendasRCap.store);
 routes.put("/vendasRCap/:id", VendasRCap.update);
 routes.delete("/vendasRCap/:id", VendasRCap.destroy);
@@ -28,7 +28,7 @@ routes.delete("/aluguelCap/:id", AluguelCap.destroy);
 const AluguelRCap = require("./controllers/controllersCap/AluguelRCapController");
 
 routes.get("/aluguelRCap", AluguelRCap.index);
-routes.get("/aluguelRCap/ano/:first/:last", AluguelRCap.agruparRegioes);
+routes.get("/aluguelRCap/:region/ano/:first/:last", AluguelRCap.agruparRegioes);
 routes.post("/aluguelRCap", AluguelRCap.store);
 routes.put("/aluguelRCap/:id", AluguelRCap.update);
 routes.delete("/aluguelRCap/:id", AluguelRCap.destroy);

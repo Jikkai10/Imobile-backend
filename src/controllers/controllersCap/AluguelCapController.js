@@ -46,7 +46,9 @@ module.exports = {
     for(var i = parseInt(req.params.first); i <= parseInt(req.params.last); i++){
       let numeroAlugueis = [0,0,0];
       let precoAlugueis = [0,0,0,0,0,0,0,0,0,0,0];
+      let precoAlugueisM2 = [0,0,0,0,0,0,0];
       let numeroQuartos = [0,0,0,0,0,0];
+      let numGar = [0,0,0,0,0];
       let quant = 0;
       aCap.map((item,index)=>{
         if(item.ano === i){
@@ -66,12 +68,26 @@ module.exports = {
           precoAlugueis[9] += item.valorAluguel.aluguel_2000;
           precoAlugueis[10] += item.valorAluguel.aluguel_2001;
 
+          precoAlugueisM2[0] += item.valorAluguelM2.M2_10;
+          precoAlugueisM2[1] += item.valorAluguelM2.M2_15;
+          precoAlugueisM2[2] += item.valorAluguelM2.M2_20;
+          precoAlugueisM2[3] += item.valorAluguelM2.M2_25;
+          precoAlugueisM2[4] += item.valorAluguelM2.M2_30;
+          precoAlugueisM2[5] += item.valorAluguelM2.M2_35;
+          precoAlugueisM2[6] += item.valorAluguelM2.M2_36;
+
           numeroQuartos[0] += item.aluguelDorm.alKit;
           numeroQuartos[1] += item.aluguelDorm.al1Dorm;
           numeroQuartos[2] += item.aluguelDorm.al2Dorm;
           numeroQuartos[3] += item.aluguelDorm.al3Dorm;
           numeroQuartos[4] += item.aluguelDorm.al4Dorm;
           numeroQuartos[5] += item.aluguelDorm.al4_Dorm;
+
+          numGar[0] += item.aluguelGar.al0Gar;
+          numGar[1] += item.aluguelGar.al1Gar;
+          numGar[2] += item.aluguelGar.al2Gar;
+          numGar[3] += item.aluguelGar.al3Gar;
+          numGar[4] += item.aluguelGar.al3_Gar;
 
           quant += 1;
         }
@@ -81,8 +97,14 @@ module.exports = {
       let totTipo = numeroQuartos.reduce((total,valorAtual) => total + valorAtual, 0);;
       numeroQuartos = numeroQuartos.map((item,index)=>{return item*100/totTipo});
 
+      let totGar = numGar.reduce((total,valorAtual) => total + valorAtual, 0);;
+      numGar = numGar.map((item,index)=>{return item*100/totGar});
+
       let totValorVendas = precoAlugueis.reduce((total,valorAtual) => total + valorAtual, 0);
       precoAlugueis = precoAlugueis.map((item,index)=>{return item*100/totValorVendas});
+
+      let totValorVendasM2 = precoAlugueisM2.reduce((total,valorAtual) => total + valorAtual, 0);
+      precoAlugueisM2 = precoAlugueisM2.map((item,index)=>{return item*100/totValorVendasM2});
 
       numeroAlugueis = numeroAlugueis.map((item,index)=> item/quant);
 
@@ -90,7 +112,9 @@ module.exports = {
         ano: i,
         numeroAluguel: numeroAlugueis,
         valorAluguel: precoAlugueis,
+        valorAluguelM2: precoAlugueisM2,
         aluguelDorm: numeroQuartos,
+        aluguelGar: numGar,
       });
     }
     return res.json(aCapAnos);

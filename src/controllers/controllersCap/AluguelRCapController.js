@@ -38,24 +38,18 @@ module.exports = {
   async agruparRegioes(req, res){
     const aRCap = await Aluguel_RCap.find();
     const aCap = await Aluguel_Cap.find();
-    let anos = aRCap.map((item,index) => {
-      return item.ano;
-    });
-    let regioes = aRCap.map((item,index) =>{
-      return item.region;
-    });
-    
-    regioes = regioes.filter((item, index) => regioes.indexOf(item) === index);
+
    
     const aRCapAnos = [];
-    regioes.map((valor,index)=>{
       for(var i = parseInt(req.params.first); i <= parseInt(req.params.last); i++){
         let numeroAlugueis = [0,0,0];
         let numeroQuartos = [0,0,0,0,0,0];
+        let numGar = [0,0,0,0,0];
         let valorMedio = 0;
+        let valorMedioM2 = 0;
         let quant = 0;
         aRCap.map((item,index)=>{
-          if(item.ano === i && item.region === valor){
+          if(item.ano === i && item.region === req.params.region){
             aCap.map((itemCap,index)=>{
               if((itemCap.ano === item.ano) && (itemCap.mes === item.mes)){
               if(item.region === 'a'){
@@ -91,6 +85,12 @@ module.exports = {
             numeroQuartos[3] += item.aluguelDorm.al3Dorm;
             numeroQuartos[4] += item.aluguelDorm.al4Dorm;
             numeroQuartos[5] += item.aluguelDorm.al4_Dorm;
+
+            numGar[0] = item.aluguelGar.al0Gar;
+            numGar[1] = item.aluguelGar.al1Gar;
+            numGar[2] = item.aluguelGar.al2Gar;
+            numGar[3] = item.aluguelGar.al3Gar;
+            numGar[4] = item.aluguelGar.al3_Gar;
             
             //let somaDorm = item.vendasDorm.vendKit + item.vendasDorm.vend1Dorm + item.vendasDorm.vend2Dorm + item.vendasDorm.vend3Dorm + item.vendasDorm.vend4Dorm;
             let casa = (item.valorMed.casas.kit +
@@ -106,50 +106,44 @@ module.exports = {
               item.valorMed.apart.dorm4);
 
             valorMedio += (casa + apart); 
+
+            let casaM2 = (item.valorMedM2.casas.kit +
+              item.valorMedM2.casas.dorm1 +
+              item.valorMedM2.casas.dorm2 +
+              item.valorMedM2.casas.dorm3 +
+              item.valorMedM2.casas.dorm4);
+            
+            let apartM2 = (item.valorMedM2.apart.kit +
+              item.valorMedM2.apart.dorm1 +
+              item.valorMedM2.apart.dorm2 +
+              item.valorMedM2.apart.dorm3 +
+              item.valorMedM2.apart.dorm4);
+
+            valorMedioM2 += (casaM2 + apartM2); 
+
             quant += 1;
           }
         });
         
         let totTipo = numeroQuartos.reduce((total,valorAtual) => total + valorAtual, 0);;
         numeroQuartos = numeroQuartos.map((item,index)=>{return item*100/totTipo});
+
+        let totGar = numGar.reduce((total,valorAtual) => total + valorAtual, 0);;
+        numGar = numGar.map((item,index)=>{return item*100/totGar});
+
+
         numeroAlugueis = numeroAlugueis.map((item,index)=> item/quant);
         aRCapAnos.push({
           ano: i,
-          region: valor,
+          region: req.params.region,
           valorMedio: valorMedio/quant,
+          valorMedioM2: valorMedioM2/quant,
           numeroAluguel: numeroAlugueis,
           aluguelDorm: numeroQuartos,
+          aluguelGar: numGar,
         });
       }
-    });
-    const grupoRegioes = {
-      regiaoA: [],
-      regiaoB: [],
-      regiaoC: [],
-      regiaoD: [],
-      regiaoE: [],
-    }
-    aRCapAnos.map((value, index) => {
-      
-      if(value.region === 'a'){
-        grupoRegioes.regiaoA.push(value);
-      }
-      if(value.region === 'b'){
-        grupoRegioes.regiaoB.push(value);
-      }
-      if(value.region === 'c'){
-        grupoRegioes.regiaoC.push(value);
-      }
-      if(value.region === 'd'){
-        grupoRegioes.regiaoD.push(value);
-      }
-      if(value.region === 'e'){
-        grupoRegioes.regiaoE.push(value);
-      }
-
-      
-    });
     
-    return res.json(grupoRegioes);
+    return res.json(aRCapAnos);
   }
 };
