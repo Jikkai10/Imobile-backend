@@ -150,8 +150,8 @@ module.exports = {
         vRCapAnos.push({
           ano: i,
           region: req.params.region,
-          valorMedio: valorMedio/quant,
-          valorMedioM2: valorMedioM2/quant,
+          valorMedio: [valorMedio/quant],
+          valorMedioM2: [valorMedioM2/quant],
           numeroVendas: numeroVendas,
           vendaTipoImovel: tipoImovel,
           numDorm: numDorm,

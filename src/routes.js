@@ -33,6 +33,36 @@ routes.post("/aluguelRCap", AluguelRCap.store);
 routes.put("/aluguelRCap/:id", AluguelRCap.update);
 routes.delete("/aluguelRCap/:id", AluguelRCap.destroy);
 
+const vendasRegion = require("./controllers/controllersRegion/vendas");
+
+routes.get("/vendasRegion", vendasRegion.index);
+routes.post("/vendasRegion", vendasRegion.store);
+routes.put("/vendasRegion/:id", vendasRegion.update);
+routes.delete("/vendasRegion/:id", vendasRegion.destroy);
+
+const vendasCity = require("./controllers/controllersRegion/vendasCity");
+
+routes.get("/vendasCity", vendasCity.index);
+routes.post("/vendasCity", vendasCity.store);
+routes.put("/vendasCity/:id", vendasCity.update);
+routes.delete("/vendasCity/:id", vendasCity.destroy);
+
+const aluguelRegion = require("./controllers/controllersRegion/aluguel");
+
+routes.get("/aluguelRegion", aluguelRegion.index);
+routes.post("/aluguelRegion", aluguelRegion.store);
+routes.put("/aluguelRegion/:id", aluguelRegion.update);
+routes.delete("/aluguelRegion/:id", aluguelRegion.destroy);
+
+const aluguelCity = require("./controllers/controllersRegion/aluguelCity");
+
+routes.get("/aluguelCity", aluguelCity.index);
+routes.post("/aluguelCity", aluguelCity.store);
+routes.put("/aluguelCity/:id", aluguelCity.update);
+routes.delete("/aluguelCity/:id", aluguelCity.destroy);
+
+
+
 
 
 module.exports = routes;

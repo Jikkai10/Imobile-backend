@@ -136,8 +136,8 @@ module.exports = {
         aRCapAnos.push({
           ano: i,
           region: req.params.region,
-          valorMedio: valorMedio/quant,
-          valorMedioM2: valorMedioM2/quant,
+          valorMedio: [valorMedio/quant],
+          valorMedioM2: [valorMedioM2/quant],
           numeroAluguel: numeroAlugueis,
           aluguelDorm: numeroQuartos,
           aluguelGar: numGar,
