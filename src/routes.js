@@ -36,6 +36,7 @@ routes.delete("/aluguelRCap/:id", AluguelRCap.destroy);
 const vendasRegion = require("./controllers/controllersRegion/vendas");
 
 routes.get("/vendasRegion", vendasRegion.index);
+routes.get("/vendasRegion/:region/:tipo/ano/:first/:last", vendasRegion.indexAno);
 routes.post("/vendasRegion", vendasRegion.store);
 routes.put("/vendasRegion/:id", vendasRegion.update);
 routes.delete("/vendasRegion/:id", vendasRegion.destroy);
@@ -43,6 +44,8 @@ routes.delete("/vendasRegion/:id", vendasRegion.destroy);
 const vendasCity = require("./controllers/controllersRegion/vendasCity");
 
 routes.get("/vendasCity", vendasCity.index);
+routes.get("/vendasCity/:region/:cidade/ano/:first/:last", vendasCity.indexAno);
+routes.get("/getCitys", vendasCity.cidades);
 routes.post("/vendasCity", vendasCity.store);
 routes.put("/vendasCity/:id", vendasCity.update);
 routes.delete("/vendasCity/:id", vendasCity.destroy);
@@ -50,6 +53,7 @@ routes.delete("/vendasCity/:id", vendasCity.destroy);
 const aluguelRegion = require("./controllers/controllersRegion/aluguel");
 
 routes.get("/aluguelRegion", aluguelRegion.index);
+routes.get("/aluguelRegion/:region/:tipo/ano/:first/:last", aluguelRegion.indexAno);
 routes.post("/aluguelRegion", aluguelRegion.store);
 routes.put("/aluguelRegion/:id", aluguelRegion.update);
 routes.delete("/aluguelRegion/:id", aluguelRegion.destroy);
@@ -57,6 +61,7 @@ routes.delete("/aluguelRegion/:id", aluguelRegion.destroy);
 const aluguelCity = require("./controllers/controllersRegion/aluguelCity");
 
 routes.get("/aluguelCity", aluguelCity.index);
+routes.get("/aluguelCity/:region/:cidade/ano/:first/:last", aluguelCity.indexAno);
 routes.post("/aluguelCity", aluguelCity.store);
 routes.put("/aluguelCity/:id", aluguelCity.update);
 routes.delete("/aluguelCity/:id", aluguelCity.destroy);

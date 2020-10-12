@@ -130,6 +130,12 @@ module.exports = {
         numGar: numGar,
       });
     }
+
+    let firsts = [vCapAnos[0].vendTot[0],vCapAnos[0].vendTot[1],vCapAnos[0].vendTot[2]];
+    vCapAnos.forEach(
+      (item,index) =>{ 
+        vCapAnos[index].vendTot = item.vendTot.map((item,index) =>  item*100/firsts[index] - 100)
+      });
     return res.json(vCapAnos);
   }
 };

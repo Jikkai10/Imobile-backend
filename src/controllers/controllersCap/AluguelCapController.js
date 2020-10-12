@@ -117,6 +117,13 @@ module.exports = {
         aluguelGar: numGar,
       });
     }
+
+    let firsts = [aCapAnos[0].numeroAluguel[0],aCapAnos[0].numeroAluguel[1],aCapAnos[0].numeroAluguel[2]];
+    aCapAnos.forEach(
+      (item,index) =>{ 
+        aCapAnos[index].numeroAluguel = item.numeroAluguel.map((item,index) =>  item*100/firsts[index] - 100)
+      });
+
     return res.json(aCapAnos);
   },
   

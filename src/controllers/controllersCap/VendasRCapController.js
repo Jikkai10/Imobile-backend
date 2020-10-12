@@ -159,6 +159,16 @@ module.exports = {
         });
       }
     
+      let firsts = [vRCapAnos[0].numeroVendas[0],vRCapAnos[0].numeroVendas[1],vRCapAnos[0].numeroVendas[2]];
+      let firstM = [vRCapAnos[0].valorMedio[0]];
+      let firstM2 = [vRCapAnos[0].valorMedioM2[0]];
+      vRCapAnos.forEach(
+        (item,index) =>{ 
+          vRCapAnos[index].numeroVendas = item.numeroVendas.map((item,index) =>  item*100/firsts[index] - 100);
+          vRCapAnos[index].valorMedio = item.valorMedio.map((item,index) =>  item*100/firstM[index] - 100);
+          vRCapAnos[index].valorMedioM2 = item.valorMedioM2.map((item,index) =>  item*100/firstM2[index] - 100);
+        });  
+        //console.log(vRCapAnos);
     return res.json(vRCapAnos);
   }
 };

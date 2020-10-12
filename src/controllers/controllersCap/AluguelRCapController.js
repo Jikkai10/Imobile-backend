@@ -144,6 +144,16 @@ module.exports = {
         });
       }
     
+      let firsts = [aRCapAnos[0].numeroAluguel[0],aRCapAnos[0].numeroAluguel[1],aRCapAnos[0].numeroAluguel[2]];
+      let firstM = [aRCapAnos[0].valorMedio[0]];
+      let firstM2 = [aRCapAnos[0].valorMedioM2[0]];
+      aRCapAnos.forEach(
+        (item,index) =>{ 
+          aRCapAnos[index].numeroAluguel = item.numeroAluguel.map((item,index) =>  item*100/firsts[index] - 100);
+          aRCapAnos[index].valorMedio = item.valorMedio.map((item,index) =>  item*100/firstM[index] - 100);
+          aRCapAnos[index].valorMedioM2 = item.valorMedioM2.map((item,index) =>  item*100/firstM2[index] - 100);
+        }); 
+
     return res.json(aRCapAnos);
   }
 };
