@@ -68,17 +68,43 @@ module.exports = {
         medOutrosM2: medOutrosM2,
       });
     }
-    let first = [aCityAnos[0].medNobre,aCityAnos[0].medCentro,aCityAnos[0].medOutros,aCityAnos[0].medNobreM2,aCityAnos[0].medCentroM2,aCityAnos[0].medOutrosM2]
+    let first = [0,0,0,0,0,0];
+    aCityAnos.forEach(
+      (item,index) =>{
+        if(item.medNobre !== 0 && first[0] === 0){
+          first[0] = item.medNobre;
+        }
+        if(item.medCentro !== 0 && first[1] === 0){
+          first[1] = item.medCentro;
+        }
+        if(item.medOutros !== 0 && first[2] === 0){
+          first[2] = item.medOutros;
+        }
+        if(item.medNobreM2 !== 0 && first[3] === 0){
+          first[3] = item.medNobreM2;
+        }
+        if(item.medCentroM2 !== 0 && first[4] === 0){
+          first[4] = item.medCentroM2;
+        }
+        if(item.medOutrosM2 !== 0 && first[5] === 0){
+          first[5] = item.medOutrosM2;
+        }
+      }
+    );
+    first.forEach((item,index) =>{
+      if(first[index] === 0){
+        first[index] = 1;
+      }
+    });
     aCityAnos.forEach(
       (item,index) =>{ 
-        aCityAnos[index].medNobre = [item.medNobre];
+        aCityAnos[index].medNobre = [item.medNobre*100/first[0]- 100];
         aCityAnos[index].medCentro = [item.medCentro*100/first[1] - 100];
         aCityAnos[index].medOutros = [item.medOutros*100/first[2] - 100];
-        aCityAnos[index].medNobreM2 = [item.medNobreM2];
+        aCityAnos[index].medNobreM2 = [item.medNobreM2*100/first[3] - 100];
         aCityAnos[index].medCentroM2 = [item.medCentroM2*100/first[4] - 100];
         aCityAnos[index].medOutrosM2 = [item.medOutrosM2*100/first[5] - 100];
       });
-      console.log(aCityAnos)
     return res.json(aCityAnos);
   }
 }

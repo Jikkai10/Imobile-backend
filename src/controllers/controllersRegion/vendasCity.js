@@ -38,7 +38,13 @@ module.exports = {
 
   async cidades(req, res){
     const vCity = await VendasCity.find();
-    const cidade = vCity.map((item) => item.cidade);
+    let cidade = [];
+    vCity.map((item) => {
+      if(item.regiao === req.params.region){
+        cidade.push(item.cidade);
+      }
+      
+    });
     let cidades = cidade.filter((este, i) => cidade.indexOf(este) === i);
     return res.json(cidades);
   },
@@ -78,7 +84,7 @@ module.exports = {
         medOutrosM2: medOutrosM2,
       });
     }
-    console.log(vCityAnos[0].medNobre*100/vCityAnos[0].medNobre - 100);
+    
     
     let first = [0,0,0,0,0,0];
     vCityAnos.forEach(
@@ -117,7 +123,7 @@ module.exports = {
         vCityAnos[index].medCentroM2 = [item.medCentroM2*100/first[4] - 100];
         vCityAnos[index].medOutrosM2 = [item.medOutrosM2*100/first[5] - 100];
       });
-      console.log(vCityAnos);
+      
     return res.json(vCityAnos);
   }
 }

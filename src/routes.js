@@ -1,7 +1,11 @@
 const express = require("express");
+const multer = require('multer');
 const routes = express.Router();
+const multerConfig = require('./config/multer');
 
-const VendasCap = require("./controllers/controllersCap/VendasCapController");
+
+
+const VendasCap = require('./controllers/controllersCap/VendasCapController');
 
 routes.get("/vendasCap", VendasCap.index);
 routes.get("/vendasCap/ano/:first/:last", VendasCap.indexAno);
@@ -45,7 +49,7 @@ const vendasCity = require("./controllers/controllersRegion/vendasCity");
 
 routes.get("/vendasCity", vendasCity.index);
 routes.get("/vendasCity/:region/:cidade/ano/:first/:last", vendasCity.indexAno);
-routes.get("/getCitys", vendasCity.cidades);
+routes.get("/getCitys/:region", vendasCity.cidades);
 routes.post("/vendasCity", vendasCity.store);
 routes.put("/vendasCity/:id", vendasCity.update);
 routes.delete("/vendasCity/:id", vendasCity.destroy);
@@ -65,6 +69,13 @@ routes.get("/aluguelCity/:region/:cidade/ano/:first/:last", aluguelCity.indexAno
 routes.post("/aluguelCity", aluguelCity.store);
 routes.put("/aluguelCity/:id", aluguelCity.update);
 routes.delete("/aluguelCity/:id", aluguelCity.destroy);
+
+const Avaliadores = require('./controllers/aval');
+
+routes.get("/avaliadores", Avaliadores.index);
+routes.post("/avaliadores", multer(multerConfig).single('file'), Avaliadores.store);
+routes.put("/avaliadores/:id", Avaliadores.update);
+routes.delete("/avaliadores/:id", Avaliadores.destroy);
 
 
 
